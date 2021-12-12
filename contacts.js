@@ -17,14 +17,14 @@ const listContacts = async () => {
 
 const getContactById = async contactId => {
   const contacts = await readContactsFile();
-  const [result] = contacts.filter(contact => contact.id === contactId);
-  return result;
+  const contact = contacts.find(contact => contact.id === contactId);
+  return contact;
 };
 
 const removeContact = async contactId => {
   const contacts = await readContactsFile();
-  const [result] = contacts.filter(contact => contact.id === contactId);
-  if (!result) {
+  const contact = contacts.find(contact => contact.id === contactId);
+  if (!contact) {
     return;
   }
   const updContacts = contacts.filter(contact => contact.id !== contactId);
@@ -37,6 +37,10 @@ const removeContact = async contactId => {
 };
 
 const addContact = async (name, email, phone) => {
+  if (name === undefined || email === undefined || phone === undefined) {
+    return;
+  }
+  console.log('test');
   const contacts = await readContactsFile();
   const newContact = { name, email, phone, id: crypto.randomUUID() };
   contacts.push(newContact);

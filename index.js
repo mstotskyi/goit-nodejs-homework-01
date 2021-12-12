@@ -37,6 +37,11 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 
     case 'add':
       const newContactToAdd = await addContact(name, email, phone);
+      console.log(newContactToAdd);
+      if (newContactToAdd === undefined) {
+        console.log(chalk.red('Invalid input'));
+        return;
+      }
       console.log(
         chalk.green(`Сontact '${newContactToAdd.name}' successfully added`),
       );
