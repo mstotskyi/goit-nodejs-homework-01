@@ -18,7 +18,6 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
@@ -34,17 +33,14 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
         return;
       }
       console.log(chalk.red(`Сontact with id: '${id}' not found`));
-
-      // ... id
       break;
 
     case 'add':
       const newContactToAdd = await addContact(name, email, phone);
       console.log(
-        chalk.green(`Сontact '${addNewContact.name}' successfully added`),
+        chalk.green(`Сontact '${newContactToAdd.name}' successfully added`),
       );
       console.log(newContactToAdd);
-      // ... name email phone
       break;
 
     case 'remove':
@@ -55,8 +51,6 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
         return;
       }
       console.log(chalk.red(`Сontact with id: '${id}' not found`));
-
-      // ... id
       break;
 
     default:
@@ -64,4 +58,4 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
   }
 };
 
-invokeAction(argv);
+invokeAction(argv).then(() => console.log('Operation success'));
