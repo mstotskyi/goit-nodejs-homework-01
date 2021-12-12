@@ -37,7 +37,7 @@ const removeContact = async contactId => {
 };
 
 const addContact = async (name, email, phone) => {
-  if (name === undefined || email === undefined || phone === undefined) {
+  if (name === void 0 || email === void 0 || phone === void 0) {
     return;
   }
   console.log('test');
